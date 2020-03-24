@@ -4,10 +4,16 @@ class App < Sinatra::Base
   
   configure do
     enable :sessions
-    set :session_secret, "ds23e9c5b1s6542dsetd63vh7ser9cc1ew"
+    set :session_secret, "secret"
   end
-  
-  get '/hey' do 
-    @session = session
+
+  get '/' do
+    erb :index
+  end
+
+  post '/checkout' do
+    @sessions = session
+    item = params["item"]
+    @sessions[:item] = item
   end
 end
